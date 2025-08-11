@@ -12,7 +12,7 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
 
         builder.HasOne<Client>().WithMany().HasForeignKey(c => c.ClientId);
 
-        builder.Property(p => p.Name);
+        builder.Property(p => p.Name).HasMaxLength(200);
 
         builder.Property(p => p.Status);
         builder.Property(p => p.Budget);
