@@ -1,0 +1,32 @@
+services:
+  projecttracker.api:
+    container_name: ProjectTracker.Api
+    image: ${DOCKER_REGISTRY-}projecttrackerapi
+    build:
+      context: .
+      dockerfile: src/ProjectTracker.Api/Dockerfile
+    ports:
+      - 5000:8080
+      - 5001:8081
+
+  projecttracker.blazor:
+    container_name: ProjectTracker.Frontend
+    image: ${DOCKER_REGISTRY-}projecttrackerblazor
+    build:
+      context: .
+      dockerfile: frontend/ProjectTracker.Blazor/ProjectTracker.Blazor/Dockerfile
+    ports:
+      - 7777:8080
+      - 7778:8081
+
+  projecttracker.database:
+    image: postgres:latest
+    container_name: ProjectTracker.Database
+    environment:
+      - POSTGRES_DB=projecttracker
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./.containers/db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
