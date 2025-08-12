@@ -10,7 +10,6 @@ jobs:
     - uses: actions/checkout@v4
     - uses: actions/setup-dotnet@v4
       with: { dotnet-version: '8.x' }
-    - run: dotnet restore
-    - run: dotnet build -c Release --no-restore
-    - run: dotnet test FreelanceTracker.Tests -c Release --no-build --logger trx
+    - run: dotnet restore ./ProjectTracker.sln
+    - run: dotnet build ./ProjectTracker.sln  -c Release --no-restore
 
