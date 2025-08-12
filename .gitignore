@@ -484,3 +484,5 @@ $RECYCLE.BIN/
 *.swp
 
 .containers/
+/src/ProjectTracker.Api/appsettings.Development.json
+/frontend/ProjectTracker.Blazor/ProjectTracker.Blazor/appsettings.Development.json
