@@ -12,8 +12,8 @@ using ProjectTracker.Infrastructure.Database;
 namespace ProjectTracker.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250811185542_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250812042447_Create")]
+    partial class Create
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,7 +81,8 @@ namespace ProjectTracker.Infrastructure.Database.Migrations
                         .HasColumnName("created_at");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
                         .HasColumnName("name");
 
                     b.Property<int>("Status")

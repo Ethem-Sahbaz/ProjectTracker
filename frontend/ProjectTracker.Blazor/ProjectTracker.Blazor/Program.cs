@@ -3,7 +3,8 @@ using ProjectTracker.Blazor.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<HttpClient>();
+builder.Services.AddHttpClient();
+
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
