@@ -10,16 +10,7 @@ jobs:
     - uses: actions/checkout@v4
     - uses: actions/setup-dotnet@v4
       with: { dotnet-version: '8.x' }
-    - run: for proj in $(find test -name '*.csproj'); do
-           echo "Restoring $proj"
-           dotnet restore "$proj"
-           done
-           
-    - run: for proj in $(find test -name '*.csproj'); do
-           echo "Building $proj"
-           dotnet build "$proj" --configuration Debug
-           done
-           
-    - run: for proj in $(find test -name '*.csproj'); do
-           dotnet test "$proj" --no-build
-           done 
+    - run: dotnet restore
+    - run: dotnet build -c Release --no-restore
+    - run: dotnet test FreelanceTracker.Tests -c Release --no-build --logger trx
+
