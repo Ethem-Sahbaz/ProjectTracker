@@ -1,9 +1,11 @@
+using ProjectTracker.Api.Abstractions.Endpoints;
 using ProjectTracker.Infrastructure;
 using ProjectTracker.Infrastructure.Database.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
+builder.Services.AddEndpoints(typeof(Program).Assembly);
 
 var allowedOrigins = builder.Configuration
     .GetSection("AllowedOrigins")
@@ -21,6 +23,8 @@ builder.Services.AddCors(o =>
 
 var app = builder.Build();
 
+app.MapEndpoints();
+
 app.UseCors();
 
 if (app.Environment.IsDevelopment())
@@ -30,11 +34,5 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-
-app.MapGet("/", () =>
-{
-    return "test";
-});
 
 app.Run();
