@@ -1,0 +1,16 @@
+name: build-and-test
+on:
+  push: { branches: [ "main" ] }
+  pull_request: { branches: [ "main" ] }
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-dotnet@v4
+      with: { dotnet-version: '9.x' }
+    - run: dotnet restore ./ProjectTracker.sln
+    - run: dotnet build ./ProjectTracker.sln  -c Release --no-restore
+    - run: dotnet test ./ProjectTracker.sln -c Release --no-build
+
